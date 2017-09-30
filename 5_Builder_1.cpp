@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+//-----------------------------------------------------------
 /* Interface that will be returned as the product from builder */
 class HousePlan{
 public:
@@ -11,17 +12,18 @@ public:
  virtual void setFloor(string floor)=0;
 };
 
+//-----------------------------------------------------------
 /* Concrete class for the HousePlan interface */
-class House:public HousePlan{
+class House: public HousePlan{
 private :
  string window, door, kitchen, bathroom, floor;
 
 public:
- void setWindow(string window){ this->window = window; }
- void setDoor(string door){ this->door = door;}
- void setBathroom(string bathroom){ this->bathroom = bathroom;}
- void setKitchen(string kitchen){this->kitchen = kitchen;}
- void setFloor(string floor){this->floor = floor;}
+ void setWindow(string Window)    { window = Window;     }
+ void setDoor(string Door)        { door = Door;         }
+ void setBathroom(string Bathroom){ bathroom = Bathroom; }
+ void setKitchen(string Kitchen)  { kitchen = Kitchen;   }
+ void setFloor(string Floor)      { floor = Floor;       }
 
  void info(){
    cout << "Window: "   << window   << endl
@@ -32,6 +34,7 @@ public:
  }
 };
 
+//-----------------------------------------------------------
 /* Builder Class */
 class HouseBuilder
 {
@@ -46,45 +49,48 @@ public:
  virtual House* getHouse()=0;
 };
 
+//-----------------------------------------------------------
 /* Concrete class for the builder interface */
-class LavishHouse:public HouseBuilder{
+class FrenchHouse:public HouseBuilder{
 private:
  House *house;
 public:
- LavishHouse(){house = new House();}
+ FrenchHouse(){house = new House();}
 
- void buildWindow(){house->setWindow("French Window");}
- void buildDoor(){house->setDoor("Wooden Door");}
- void buildBathroom(){house->setBathroom("Modern Bathroom");}
- void buildKitchen(){house->setKitchen("Modular Kitchen");}
- void buildFloor(){house->setFloor("Wooden Floor"); }
+ void buildWindow()  { house->setWindow("French Window");    }
+ void buildDoor()    { house->setDoor("Wooden Door");        }
+ void buildBathroom(){ house->setBathroom("Modern Bathroom");}
+ void buildKitchen() { house->setKitchen("Modular Kitchen"); }
+ void buildFloor()   { house->setFloor("Wooden Floor");      }
 
  House* getHouse(){return this->house;}
 };
 
+//-----------------------------------------------------------
 /* Another Concrete class for the builder interface */
-class NormalHouse:public HouseBuilder{
+class DefaultHouse:public HouseBuilder{
 private:
  House *house;
 public:
- NormalHouse(){house = new House();}
+ DefaultHouse(){house = new House();}
 
- void buildWindow(){house->setWindow("Normal Window"); }
- void buildDoor(){house->setDoor("Metal Door");}
- void buildBathroom(){house->setBathroom("Regular Bathroom");}
- void buildKitchen(){house->setKitchen("Regular Kitchen");}
- void buildFloor(){house->setFloor("Mosaic Floor");}
+ void buildWindow()  { house->setWindow("Normal Window");     }
+ void buildDoor()    { house->setDoor("Metal Door");          }
+ void buildBathroom(){ house->setBathroom("Regular Bathroom");}
+ void buildKitchen() { house->setKitchen("Regular Kitchen");  }
+ void buildFloor()   { house->setFloor("Mosaic Floor");       }
 
  House* getHouse(){return this->house;}
 };
 
+//-----------------------------------------------------------
 /* The Director. Constructs the house */
-class Contractor{
+class Director{
 private:
  HouseBuilder *houseBuilder;
 
 public:
- Contractor(HouseBuilder *houseBuilder){
+ Director(HouseBuilder *houseBuilder){
   this->houseBuilder = houseBuilder;
  }
 
@@ -104,20 +110,20 @@ public:
 /* Example on how to use the Builder design pattern */
 int main()
 {
- HouseBuilder *lavishHouseBldr = new LavishHouse();
- HouseBuilder *normalHouseBldr = new NormalHouse();
+ HouseBuilder *frenchHouseBldr = new FrenchHouse();
+ HouseBuilder *defaultHouseBldr = new DefaultHouse();
 
- Contractor *ctr1 = new Contractor(lavishHouseBldr);
- Contractor *ctr2 = new Contractor(normalHouseBldr);
+ Director *dir1 = new Director( frenchHouseBldr );
+ Director *dir2 = new Director( defaultHouseBldr );
 
- ctr1->buildHouse();
- House *house1 = ctr1->getHouse();
- cout << "Lavish plan constructed\n\n";
+ dir1->buildHouse();
+ House *house1 = dir1->getHouse();
+ cout << "French plan constructed\n\n";
  house1->info();
 
 
- ctr2->buildHouse();
- House *house2 = ctr2->getHouse();
- cout << "Normal plan constructed\n\n";
+ dir2->buildHouse();
+ House *house2 = dir2->getHouse();
+ cout << "Default plan constructed\n\n";
  house2->info();
 }
