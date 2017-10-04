@@ -1,9 +1,11 @@
 # Design-Patterns (GoF)
 
 <ol>
-<li>	Creational patterns
-<li>	Structural patterns
-<li>	Behavioral patterns
+<li>	Creational patterns</li>
+
+<li>	Structural patterns</li>
+
+<li>	Behavioral patterns</li>
 </ol>
 
 
