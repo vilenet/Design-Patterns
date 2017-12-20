@@ -1,5 +1,7 @@
 # Design-Patterns (GoF)
 
+<p>This repository contains C++ code examples for design Patterns.</p>
+
 <ol>
   <li>  Fundamental patterns</li>  
   
