@@ -1,15 +1,15 @@
-// Нормальная реализация плохого паттерна Singleton на С++11
+// РќРѕСЂРјР°Р»СЊРЅР°СЏ СЂРµР°Р»РёР·Р°С†РёСЏ РїР»РѕС…РѕРіРѕ РїР°С‚С‚РµСЂРЅР° Singleton РЅР° РЎ++11
 #include <new>
 //#include <iostream>
 
 class Singleton
 {
   private:
-     Singleton()  = default; // Дать компилятору создать конструктор за нас
-     ~Singleton() = default; // то же что и скобки {}. Обнулит наши переменные.
+     Singleton()  = default; // Р”Р°С‚СЊ РєРѕРјРїРёР»СЏС‚РѕСЂСѓ СЃРѕР·РґР°С‚СЊ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р·Р° РЅР°СЃ
+     ~Singleton() = default; // С‚Рѕ Р¶Рµ С‡С‚Рѕ Рё СЃРєРѕР±РєРё {}. РћР±РЅСѓР»РёС‚ РЅР°С€Рё РїРµСЂРµРјРµРЅРЅС‹Рµ.
      
-     Singleton(const Singlrton&) = delete; // Копирующий конструктор. delete озн
-     Singleton& operator=(const Singleton&) = delete; //не создавать эти функции.
+     Singleton(const Singlrton&) = delete; // РљРѕРїРёСЂСѓСЋС‰РёР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ. delete РѕР·РЅ
+     Singleton& operator=(const Singleton&) = delete; //РЅРµ СЃРѕР·РґР°РІР°С‚СЊ СЌС‚Рё С„СѓРЅРєС†РёРё.
      
      void* operator new(std::size_t)   = delete;
      void* operator new[](std::size_t) = delete;
